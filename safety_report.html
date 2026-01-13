@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Safety Observation Tool</title>
+<style>
+body {
+    font-family: Arial;
+    padding: 20px;
+}
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+th, td {
+    border: 1px solid #444;
+    padding: 8px;
+    vertical-align: top;
+}
+th {
+    background: #f2f2f2;
+}
+td {
+    min-height: 50px;
+}
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+[contenteditable] {
+    background: #fffef0;
+}
+</style>
+</head>
+<body>
+
+<h2>🛡️ Safety Unsafe Act & Condition Report</h2>
+
+<button onclick="addRow()">➕ Add Observation</button>
+<button onclick="copyTable()">📋 Copy for Outlook</button>
+
+<table id="obsTable">
+<tr>
+<th>Area</th>
+<th>Title</th>
+<th>VSS Standard</th>
+<th>Image</th>
+<th>Action Taken</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td contenteditable></td>
+<td contenteditable></td>
+<td contenteditable></td>
+<td contenteditable>Paste Image Here</td>
+<td contenteditable></td>
+<td contenteditable></td>
+</tr>
+</table>
+
+<script>
+function addRow() {
+    let table = document.getElementById("obsTable");
+    let row = table.insertRow();
+    for(let i=0;i<6;i++){
+        let cell = row.insertCell(i);
+        cell.contentEditable = "true";
+        if(i==3) cell.innerHTML="Paste Image Here";
+    }
+}
+
+function copyTable(){
+    let table = document.getElementById("obsTable");
+    let range = document.createRange();
+    range.selectNode(table);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand("copy");
+    alert("Table copied. Paste into Outlook mail body.");
+}
+</script>
+
+</body>
+</html>
